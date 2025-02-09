@@ -1,0 +1,26 @@
+2025-02-09 12:21:35,176 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-02-09 12:22:11,743 [Worker-11: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:BloodBank:0.0.1-SNAPSHOT @ C:\Users\shrid\OneDrive\Desktop\VitalDrop\BackEnd\pom.xml.
+2025-02-09 12:22:15,011 [Worker-11: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BackEnd/src/main/java
+2025-02-09 12:22:15,016 [Worker-11: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BackEnd/src/main/resources
+2025-02-09 12:22:15,018 [Worker-11: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BackEnd/src/main/resources
+2025-02-09 12:22:15,150 [Worker-11: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BackEnd/src/test/java
+2025-02-09 12:22:15,153 [Worker-11: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BackEnd/src/test/resources
+2025-02-09 12:22:15,768 [Worker-11: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 7 sec
+2025-02-09 12:22:20,935 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-02-09 12:22:20,936 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-02-09 12:22:20,943 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2025-02-09 12:22:20,971 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 10 resources
+2025-02-09 12:22:21,039 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-02-09 12:22:21,039 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-02-09 12:22:21,039 [Worker-18: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\shrid\OneDrive\Desktop\VitalDrop\BackEnd\src\test\resources
+2025-02-09 12:25:51,802 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-02-09 12:29:27,207 [Worker-9: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:BloodBank:0.0.1-SNAPSHOT @ C:\Users\shrid\OneDrive\Desktop\VitalDrop\BackEnd\pom.xml.
+2025-02-09 12:29:34,250 [Worker-9: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BackEnd/src/main/java
+2025-02-09 12:29:34,251 [Worker-9: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BackEnd/src/main/resources
+2025-02-09 12:29:34,252 [Worker-9: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BackEnd/src/main/resources
+2025-02-09 12:29:34,252 [Worker-9: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BackEnd/src/test/java
+2025-02-09 12:29:34,799 [Worker-9: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 12 sec
+2025-02-09 12:29:36,783 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2025-02-09 12:29:36,784 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2025-02-09 12:29:36,790 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2025-02-09 12:29:36,819 [Worker-7: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 10 resources
