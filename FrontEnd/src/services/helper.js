@@ -7,7 +7,7 @@ import axios from "axios";
 //     'Content-Type': 'application/json',
 //   },
 // });
-export const BASE_URL = "http://localhost:7070";
+export const BASE_URL = "https://vitaldrop-90yy.onrender.com";
 
 export const Myaxios = axios.create({
   baseURL: BASE_URL,
