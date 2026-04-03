@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 //	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //		
-//		auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
+//		auth.userDetailsService(userDetailsService).encoder(encoder);
 //	}
 //	//configuration for role based authorization
 //	/*
@@ -103,7 +103,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 	
