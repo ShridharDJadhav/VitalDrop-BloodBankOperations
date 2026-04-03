@@ -60,9 +60,11 @@ public class UserDTO {
 	@JsonProperty(access = Access.READ_ONLY)
 	Status status ;
 	
-	@JsonProperty(access = Access.READ_ONLY)
+	//@JsonProperty(access = Access.READ_ONLY)
 	private Role role;
-	
+
+
+
 	public UserDTO(){
 		this.status=Status.PENDING;
 //		System.out.println("------testing flow---(in dto no--)--> "+status);

@@ -2,14 +2,11 @@ package com.app.service.UserService;
 
 import java.io.File;
 import java.util.List;
-import java.util.Optional;
 
+import com.app.service.IEmailService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,12 +17,10 @@ import com.app.dao.IIdentityProofDao;
 import com.app.dao.IUserDao;
 import com.app.dto.AddUserByAdminDTO;
 import com.app.dto.UserDTO;
-import com.app.entities.Gender;
 import com.app.entities.IdentityProof;
 import com.app.entities.Role;
 import com.app.entities.Status;
 import com.app.entities.User;
-import com.app.service.IEmailSendingService;
 import com.app.service.ImageHandlingService;
 import com.app.service.IdentityproofService.IIdentityProofService;
 
@@ -42,9 +37,6 @@ public class UserServiceImpl implements IUserService {
 	private IUserDao userDao;
 
 	@Autowired
-	private IEmailSendingService emailSendingService;
-
-	@Autowired
 	private IIdentityProofService proofService;
 
 	@Autowired
@@ -58,6 +50,9 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+
+    @Autowired
+    private IEmailService emailService;
 
 	@Override
 	public List<IdentityProof> getAllUsers() {
@@ -97,8 +92,14 @@ public class UserServiceImpl implements IUserService {
 		} else {
 			User user = modelMapper.map(userdto, User.class); // Mapping userdto to user
 			user.setPassword(encoder.encode(user.getPassword()));
-			user.setRole(Role.ROLE_USER);
-			
+			//user.setRole(Role.ROLE_USER);
+            if (userdto.getRole() != null) {
+                user.setRole(userdto.getRole());
+            } else {
+                user.setRole(Role.ROLE_USER);
+            }
+
+            System.out.println("ROLE FROM FRONTEND: " + userdto.getRole());
 			User user1 = userDao.save(user);
 			
 			IdentityProof identityProof = modelMapper.map(userdto, IdentityProof.class);
@@ -109,14 +110,66 @@ public class UserServiceImpl implements IUserService {
 			userDtoReturn.setUniqueIdNumber(proof.getUniqueIdNumber()); // setting id number with userdto
 			userDtoReturn.setDocumentType(proof.getDocumentType());
 
-			/*
-			 * if(user1!=null && proof!=null) { String
-			 * messageBody="Thankyou <h3> "+user1.getFirstName()
-			 * +" </h3> for registering with us" +
-			 * "from the given link you can directly visit to us:<a href='www.bloodForLives.com'>OBBMS</a>"
-			 * ; String header="Welcome "+user1.getFirstName()+"!!!";
-			 * emailSendingService.sendEmail(user1.getEmail(), messageBody, header); }
-			 */
+            String header = "Welcome to VitalDrop - Registration Successful";
+
+            String messageBody =
+                    "<div style='font-family: Arial, sans-serif; padding:20px;'>"
+
+                            + "<h2 style='color:#d9534f;'>Welcome to VitalDrop Blood Bank System</h2>"
+
+                            + "<p>Hello <b style='color:blue'>" + user.getFirstName() + "</b>,</p>"
+
+                            + "<p>Congratulations! Your account has been successfully created in the <b>VitalDrop Blood Bank Management System</b>.</p>"
+
+                            + "<h3 style='margin-top:20px;'>Your Account Details</h3>"
+
+                            + "<table border='1' cellpadding='8' cellspacing='0' width='100%' style='border-collapse: collapse; text-align:center;'>"
+
+                            + "<tr style='background-color:#f2f2f2;'>"
+                            + "<th>Field</th>"
+                            + "<th>Details</th>"
+                            + "</tr>"
+
+                            + "<tr>"
+                            + "<td>Name</td>"
+                            + "<td>" + user.getFirstName() + " " + user.getLastName() + "</td>"
+                            + "</tr>"
+
+                            + "<tr>"
+                            + "<td>Email</td>"
+                            + "<td>" + user.getEmail() + "</td>"
+                            + "</tr>"
+
+                            + "<tr>"
+                            + "<td>Role</td>"
+                            + "<td>" + user.getRole() + "</td>"
+                            + "</tr>"
+
+                            + "<tr>"
+                            + "<td>Registration Date</td>"
+                            + "<td>" + java.time.LocalDate.now() + "</td>"
+                            + "</tr>"
+
+                            + "</table>"
+
+                            + "<br><p>You can now login and start using the system to:</p>"
+
+                            + "<ul>"
+                            + "<li>Search Blood Banks</li>"
+                            + "<li>Check Blood Inventory</li>"
+                            + "<li>Request Blood</li>"
+                            + "<li>Book Appointments</li>"
+                            + "</ul>"
+
+                            + "<br><p style='color:#555;'>Thank you for being part of the <b>VitalDrop</b> community and helping save lives.</p>"
+
+                            + "<br><p style='font-size:12px;color:gray;'>This is an automated email. Please do not reply.</p>"
+
+                            + "</div>";
+
+            emailService.sendMail(user.getEmail(), header, messageBody);
+
+
 
 			return userDtoReturn;
 		}
@@ -136,13 +189,13 @@ public class UserServiceImpl implements IUserService {
 
 		if (user1 != null && proof != null) {
 			String messageBody = "Hey <h3> " + user1.getFirstName() + " </h3> you are registered with us successfully"
-					+ " your pre defind password is <b>your first name+your age</b>i.e.<i><b>( " + user1.getFirstName()
+					+ " your pre defined password is <b>your first name+your age</b>i.e.<i><b>( " + user1.getFirstName()
 					+ user1.getAge() + "</b></i><p></p>" + " visit us with your credentials "
 					+ "<p>email:<p style='color:red;'>" + user1.getEmail() + "</p>" + "<p>pass :<p style='color:blue;'>"
 					+ user1.getPassword() + "</p>"
-					+ "from the given link you can directly visit to us:<a href='www.bloodForLives.com'>OBBMS</a>";
+					+ "";
 			String header = "Welcome " + user1.getFirstName() + "!!!";
-			emailSendingService.sendEmail(user1.getEmail(), messageBody, header);
+            emailService.sendMail(user1.getEmail(), messageBody, header);
 		}
 		return user1;
 	}

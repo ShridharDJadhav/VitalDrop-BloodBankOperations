@@ -32,11 +32,19 @@ const CreateAppointment = () => {
     center: "",
     bagSize: "",
     bagQuantity: "",
+    bloodGroup: "",
   });
 
   const handleChange = (event, property) => {
-    setAppointment({ ...appointment, [property]: event.target.value });
-  };
+
+  let value = event.target.value;
+
+  if(property === "bagSize" || property === "bagQuantity"){
+    value = Number(value);
+  }
+
+  setAppointment({ ...appointment, [property]: value });
+};
 
   const resetData = () => {
     setAppointment({
@@ -49,6 +57,7 @@ const CreateAppointment = () => {
       center: "",
       bagSize: "",
       bagQuantity: "",
+      bloodGroup: "",
     });
   };
 
@@ -205,6 +214,28 @@ const CreateAppointment = () => {
                         <option value="AHMEDABAD">AHMEDABAD</option>
                         <option value="THANE">THANE</option>
                         <option value="PUNE">PUNE</option>
+                      </Input>
+                    </FormGroup>
+
+                    <FormGroup>
+                      <Label for="bloodGroup">Blood Group</Label>
+                      
+                      <Input
+                        type="select"
+                        id="bloodGroup"
+                        name="bloodGroup"
+                        value={appointment.bloodGroup}
+                        onChange={(e) => handleChange(e, "bloodGroup")}
+                      >
+                        <option value="">Select blood group</option>
+                        <option value="A_positive">A+</option>
+                        <option value="A_negative">A-</option>
+                        <option value="B_positive">B+</option>
+                        <option value="B_negative">B-</option>
+                        <option value="AB_positive">AB+</option>
+                        <option value="AB_negative">AB-</option>
+                        <option value="O_positive">O+</option>
+                        <option value="O_negative">O-</option>
                       </Input>
                     </FormGroup>
 

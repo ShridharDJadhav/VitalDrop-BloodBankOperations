@@ -72,7 +72,7 @@
 //             )}
 //             <UncontrolledDropdown inNavbar nav>
 //               <DropdownToggle caret nav>More</DropdownToggle>
-//               <DropdownMenu right>
+//               <DropdownMenu end>
 //                 <DropdownItem tag={ReactLink} to="/contactus">Contact Us</DropdownItem>
 //                 <DropdownItem tag={ReactLink} to="/aboutus">About Us</DropdownItem>
 //               </DropdownMenu>
@@ -84,7 +84,7 @@
 //               <>
 //                 <UncontrolledDropdown inNavbar nav>
 //                   <DropdownToggle caret nav>Users</DropdownToggle>
-//                   <DropdownMenu right>
+//                   <DropdownMenu end>
 //                     <DropdownItem tag={ReactLink} to="/listallusers">All Users</DropdownItem>
 //                     <DropdownItem tag={ReactLink} to="/pendinguserverification">Pending ID Verification</DropdownItem>
 //                     <DropdownItem tag={ReactLink} to="/adduser">Add New User</DropdownItem>
@@ -93,7 +93,7 @@
 
 //                 <UncontrolledDropdown inNavbar nav>
 //                   <DropdownToggle caret nav>Appointments</DropdownToggle>
-//                   <DropdownMenu right>
+//                   <DropdownMenu end>
 //                     <DropdownItem tag={ReactLink} to="/all_appointment">All Appointments</DropdownItem>
 //                     <DropdownItem tag={ReactLink} to="/pendingappointment">All Pending Appointments</DropdownItem>
 //                   </DropdownMenu>
@@ -113,7 +113,7 @@
 //               <>
 //                 <UncontrolledDropdown inNavbar nav>
 //                   <DropdownToggle caret nav>Appointment</DropdownToggle>
-//                   <DropdownMenu right>
+//                   <DropdownMenu end>
 //                     <DropdownItem tag={ReactLink} to="/AppointmentHistory">Appointment History</DropdownItem>
 //                     <DropdownItem tag={ReactLink} to="/createappointment">Create New Appointment</DropdownItem>
 //                   </DropdownMenu>
@@ -196,13 +196,25 @@ function CustomNavbar() {
     dispatch(removeUser());
     storageItem.removeItem("token");
     navigate("/");
-    window.location.reload(true);
+    //window.location.reload(true);
   };
 
+  // useEffect(() => {
+  //   setLogin(isLoggedIn());
+  //   setUser(getCurrentUserDetail());
+  // }, [login]);
+
   useEffect(() => {
-    setLogin(isLoggedIn());
-    setUser(getCurrentUserDetail());
-  }, [login]);
+  const token = storageItem.getItem("token");
+
+  if (token && userDetails) {
+    setLogin(true);
+    setUser(userDetails);
+  } else {
+    setLogin(false);
+    setUser(null);
+  }
+}, [userDetails]);
 
   return (
     <div className="customNav">
@@ -239,7 +251,7 @@ function CustomNavbar() {
                 <DropdownToggle caret nav>
                   More
                 </DropdownToggle>
-                <DropdownMenu right>
+                <DropdownMenu end>
                   <DropdownItem tag={ReactLink} to="/contactus">
                     Contact Us
                   </DropdownItem>
@@ -255,13 +267,13 @@ function CustomNavbar() {
           </Nav>
 
           <Nav navbar>
-            {login && user.role === "ROLE_ADMIN" && (
+            {login && user?.role === "ROLE_ADMIN" && (
               <>
                 <UncontrolledDropdown inNavbar nav>
                   <DropdownToggle caret nav>
                     Users
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     <DropdownItem tag={ReactLink} to="/listallusers">
                       All Users
                     </DropdownItem>
@@ -278,7 +290,7 @@ function CustomNavbar() {
                   <DropdownToggle caret nav>
                     Appointments
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     <DropdownItem tag={ReactLink} to="/all_appointment">
                       All Appointments
                     </DropdownItem>
@@ -292,7 +304,7 @@ function CustomNavbar() {
                   <DropdownToggle caret nav>
                     Blood Donations
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     <DropdownItem tag={ReactLink} to="/blooddonationhistory">
                       Blood Donations HIstory
                     </DropdownItem>
@@ -306,7 +318,7 @@ function CustomNavbar() {
                   <DropdownToggle caret nav>
                     Blood Consumptions
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     <DropdownItem tag={ReactLink} to="/services">
                       All blood consumptions
                     </DropdownItem>
@@ -317,7 +329,7 @@ function CustomNavbar() {
                   <DropdownToggle caret nav>
                     Events
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     {/* <DropdownItem tag={ReactLink} to="/services">
                       See all events
                     </DropdownItem> */}
@@ -334,7 +346,7 @@ function CustomNavbar() {
                   <DropdownToggle caret nav>
                     Blood Stock
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     <DropdownItem tag={ReactLink} to="/bloodStock">
                       All blood stock
                     </DropdownItem>
@@ -353,13 +365,13 @@ function CustomNavbar() {
               </>
             )}
 
-            {login && user.role === "ROLE_USER" && (
+            {login && user?.role === "ROLE_USER" && (
               <>
                 <UncontrolledDropdown inNavbar nav>
                   <DropdownToggle caret nav>
                     Appointment
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     <DropdownItem tag={ReactLink} to="/AppointmentHistory">
                       Appointment History
                     </DropdownItem>
@@ -373,7 +385,7 @@ function CustomNavbar() {
                   <DropdownToggle caret nav>
                     Address
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     <DropdownItem tag={ReactLink} to="/getalladdresses">
                       View all addresses
                     </DropdownItem>
@@ -387,7 +399,7 @@ function CustomNavbar() {
                   <DropdownToggle caret nav>
                     Blood Donations
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     <DropdownItem tag={ReactLink} to="/donationhistory">
                       Donation History
                     </DropdownItem>
@@ -398,7 +410,7 @@ function CustomNavbar() {
                   <DropdownToggle caret nav>
                     Blood consumptions
                   </DropdownToggle>
-                  <DropdownMenu right>
+                  <DropdownMenu end>
                     <DropdownItem tag={ReactLink} to="/services">
                       All Blood consumptions
                     </DropdownItem>

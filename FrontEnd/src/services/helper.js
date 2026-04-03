@@ -7,7 +7,7 @@ import axios from "axios";
 //     'Content-Type': 'application/json',
 //   },
 // });
-export const BASE_URL = "http://localhost:8080";
+export const BASE_URL = "http://localhost:7070";
 
 export const Myaxios = axios.create({
   baseURL: BASE_URL,
@@ -78,10 +78,20 @@ const setItem = (key,value) =>{
   localStorage.setItem(key,JSON.stringify(value))
 }
 
-const getItem=(key)=>{
-  return JSON.parse(localStorage.getItem(key))
-}
+// const getItem=(key)=>{
+//   return JSON.parse(localStorage.getItem(key))
+// }
+const getItem = (key) => {
+  const data = localStorage.getItem(key);
 
+  if (!data) return null;
+
+  try {
+    return JSON.parse(data);   // works for objects
+  } catch (error) {
+    return data;               // works for JWT strings
+  }
+};
 const removeItem=(key)=>{
 localStorage.removeItem(key)
 }

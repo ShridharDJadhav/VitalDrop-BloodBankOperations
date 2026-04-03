@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.app.service.IEmailService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,6 @@ import com.app.entities.Appointment;
 import com.app.entities.Patient;
 import com.app.entities.Status;
 import com.app.entities.User;
-import com.app.service.IEmailSendingService;
 import com.app.service.BloodInventoryService.IBloodInventoryService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -47,13 +47,13 @@ public class AppointmentServiceImpl implements IAppointmentService {
 	private IBloodInventoryService bloodInventoryService;
 
 	@Autowired
-	private IEmailSendingService emailSendingService;
-
-	@Autowired
 	private IAddressDao addressDao;
 
 	@Autowired
 	private IPatientDao patientDao;
+
+    @Autowired
+    private IEmailService emailService;
 	
 	
 	// method  to return all the appointment(can be used to check history of appointment)
@@ -114,33 +114,66 @@ public class AppointmentServiceImpl implements IAppointmentService {
 				
 				
 				
-				  log.info("---inside mail sending condition checking ---> " ); header =
-				  "YOUR APPOINTMENT  REQUEST  " + status; messageBody =
-				  "hello <p><font color=blue>" + user.getFirstName() + "</font></p>" +
-				  " your scheduled appointment status has been <font color=blue>" + status +
-				  " </font>  details are given bellow ." +
-				  "<table width='100%' border='1' align='center'>" + "<tr align='center'>" +
-				  "<td><b>requesting person <b></td>" + "<td><font size=10px,color=blue>" +
-				  user.getFirstName() + "</font><b></td>" + "</tr>" + "<tr align='center'>" +
-				  "<td><b>requesting For<b></td>" + "<td><font size=10px,color=blue>" +
-				  appointmentById.getPatient().getName() + "</font><b></td>" + "</tr>" +
-				  "<tr align='center'>" + "<td><b>Blood Group<b></td>" +
-				  "<td><font size=10px,color=blue>" + appointmentById.getBloodGroup() +
-				  "</font><b></td>" + "</tr>" + "<tr align='center'>" +
-				  "<td><b>Bag Size<b></td>" + "<td><font size=10px,color=blue>" +
-				  appointmentById.getBagSize() + "</font><b></td>" + "</tr>" +
-				  "<tr align='center'>" + "<td><b>Bag Quantity<b></td>" +
-				  "<td><font size=10px,color=blue>" + appointmentById.getBagQuantity() +
-				  "</font><b></td>" + "</tr>" + "<tr align='center'>" +
-				  "<td><b>Appointment Schedule Date<b></td>" +
-				  "<td><font size=10px,color=blue>" +
-				  appointmentById.getAppointmentScheduleDate() + "</font><b></td>" + "</tr>" +
-				  "<tr align='center'>" + "<td><b>Appointment Scheduled Status<b></td>" +
-				  "<td><font size=10px,color=blue>" +
-				  appointmentById.getAppointmentScheduleDate() + "</font><b></td>" + "</tr>"
-				  
-				  ; log.info("----sending mail ---in approved condition-> " );
-				  emailSendingService.sendEmail(user.getEmail(),messageBody, header );
+				  log.info("---inside mail sending condition checking ---> " );
+
+                  header = "YOUR APPOINTMENT REQUEST " + status;
+
+                messageBody =
+                        "<h2 style='color:#d9534f;'>Blood Bank Appointment Update</h2>" +
+
+                                "<p>Hello <b style='color:blue'>" + user.getFirstName() + "</b>,</p>" +
+
+                                "<p>Your blood request appointment status has been <b style='color:green'>" + status + "</b>.</p>" +
+
+                                "<h3>Appointment Details</h3>" +
+
+                                "<table border='1' cellpadding='8' cellspacing='0' width='100%' style='border-collapse: collapse; text-align:center;'>"
+
+                                + "<tr style='background-color:#f2f2f2;'>"
+                                + "<th>Field</th>"
+                                + "<th>Details</th>"
+                                + "</tr>"
+
+                                + "<tr>"
+                                + "<td>Requesting Person</td>"
+                                + "<td>" + user.getFirstName() + "</td>"
+                                + "</tr>"
+
+                                + "<tr>"
+                                + "<td>Patient Name</td>"
+                                + "<td>" + appointmentById.getPatient().getName() + "</td>"
+                                + "</tr>"
+
+                                + "<tr>"
+                                + "<td>Blood Group</td>"
+                                + "<td>" + appointmentById.getBloodGroup() + "</td>"
+                                + "</tr>"
+
+                                + "<tr>"
+                                + "<td>Bag Size</td>"
+                                + "<td>" + appointmentById.getBagSize() + " ml</td>"
+                                + "</tr>"
+
+                                + "<tr>"
+                                + "<td>Bag Quantity</td>"
+                                + "<td>" + appointmentById.getBagQuantity() + "</td>"
+                                + "</tr>"
+
+                                + "<tr>"
+                                + "<td>Appointment Date</td>"
+                                + "<td>" + appointmentById.getAppointmentScheduleDate() + "</td>"
+                                + "</tr>"
+
+                                + "<tr>"
+                                + "<td>Status</td>"
+                                + "<td style='color:green;'><b>" + status + "</b></td>"
+                                + "</tr>"
+
+                                + "</table>"
+
+                                + "<br><p>Thank you for using our Blood Bank System.</p>";
+
+                emailService.sendMail(user.getEmail(), header, messageBody);
 				 
 				 
 			} else {
@@ -150,7 +183,7 @@ public class AppointmentServiceImpl implements IAppointmentService {
 				  messageBody +
 				  " <font/> due to some reason .<p> <ul> unavaliability of blood</ul> " +
 				  "<ul> you may have not registered your address(please register your address)</ul> </p>"
-				  ; emailSendingService.sendEmail(user.getEmail(), messageBody, header );
+				  ; emailService.sendMail(user.getEmail(), header, messageBody);
 				 }
 
 		}

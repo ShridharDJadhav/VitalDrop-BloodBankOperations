@@ -35,7 +35,7 @@ public class SignInSignUpController {
 	// dep : Auth mgr
 	@Autowired
 	private AuthenticationManager manager;
-	
+
 	@Autowired
 	private IUserService userService;
 
@@ -45,7 +45,7 @@ public class SignInSignUpController {
 	public ResponseEntity<?> validateUserCreateToken(@RequestBody @Valid AuthRequest request) {
 		// store incoming user details(not yet validated) into Authentication object
 		// Authentication i/f ---> imple by UserNamePasswordAuthToken
-		if(request==null) {
+		if (request == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("empty data sent ");
 		}
 		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(request.getEmail(),
@@ -55,23 +55,20 @@ public class SignInSignUpController {
 			// authenticate the credentials
 			Authentication authenticatedDetails = manager.authenticate(authToken);
 			UserDTO userDTO = userService.getByEmailId(authenticatedDetails.getName());
-			
-			
+
 			// => auth succcess
 //			return ResponseEntity.ok(new AuthResp("Auth successful!", utils.generateJwtToken(authenticatedDetails),userDTO));
-			return ResponseEntity.status(HttpStatus.OK).body(new AuthResp("Login successfull", utils.generateJwtToken(authenticatedDetails),userDTO));
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(new AuthResp("Login successfull", utils.generateJwtToken(authenticatedDetails), userDTO));
 		} catch (BadCredentialsException e) { // lab work : replace this by a method in global exc handler
 			// send back err resp code
-			System.out.println("err "+e);
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new AuthResp("Email Id or Password not matched  try again!!!!", null,null));
+			System.out.println("err " + e);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new AuthResp("Email Id or Password not matched  try again!!!!", null, null));
 		}
 
 	}
-	
-	
-	
+
 	// for signup
-	
-	
-	
+
 }

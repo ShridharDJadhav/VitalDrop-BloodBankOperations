@@ -29,6 +29,7 @@ const Signup = () => {
     gender: "",
     documentType: "",
     uniqueIdNumber: "",
+    role:"ROLE_USER"
   });
 
   const handleChange = (event, property) => {
@@ -46,6 +47,7 @@ const Signup = () => {
       gender: "",
       documentType: "",
       uniqueIdNumber: "",
+      role:"ROLE_USER"
     });
   };
 
@@ -127,6 +129,18 @@ const Signup = () => {
                       <Label>Document ID</Label>
                       <Input type="text" placeholder="Enter document ID" value={user.uniqueIdNumber} onChange={(e) => handleChange(e, "uniqueIdNumber")} required minLength={10} maxLength={12} />
                     </FormGroup>
+                    <FormGroup>
+  <Label>Select Role</Label>
+  <Input
+    type="select"
+    value={user.role}
+    onChange={(e) => handleChange(e, "role")}
+  >
+    <option value="ROLE_USER">User</option>
+    <option value="ROLE_ADMIN">Admin</option>
+  </Input>
+</FormGroup>
+
                     
                     <Container className="text-center">
                       <Button color="danger" className="w-100">Register</Button>

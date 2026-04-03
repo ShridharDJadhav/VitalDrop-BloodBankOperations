@@ -4,7 +4,7 @@ import { fetch } from "../services/helper";
 const getBloodStocks = (header) => {
   return fetch(
     "get",
-    `http://localhost:8080/api/admin/bloodinventory/getblood`,
+    `http://localhost:7070/api/admin/bloodinventory/getblood`,
     {},
     header,
     {}
@@ -15,7 +15,7 @@ const getBloodStocks = (header) => {
 const getUsersList = (header) => {
   return fetch(
     "get",
-    `http://localhost:8080/api/admin/users/listOfAll`,
+    `http://localhost:7070/api/admin/users/listOfAll`,
     {},
     header,
     {}
@@ -24,7 +24,7 @@ const getUsersList = (header) => {
 const getUpcomingEvents = (header) => {
   return fetch(
     "get",
-    `http://localhost:8080/api/admin/event/upcoming_events`,
+    `http://localhost:7070/api/admin/event/upcoming_events`,
     {},
     header,
     {}
@@ -35,7 +35,7 @@ const getUpcomingEvents = (header) => {
 const getPendingAppointments = (header) => {
   return fetch(
     "get",
-    `http://localhost:8080/api/admin/appointment/pending`,
+    `http://localhost:7070/api/admin/appointment/pending`,
     {},
     header,
     {}
@@ -46,7 +46,7 @@ const getPendingAppointments = (header) => {
 const ApproveRejectAppointments = (data, header) => {
   return fetch(
     "put",
-    `http://localhost:8080/api/admin/appointment/updateAppointmentsts`,
+    `http://localhost:7070/api/admin/appointment/updateAppointmentsts`,
     data,
     header,
     {}
@@ -58,7 +58,7 @@ const ApproveRejectAppointments = (data, header) => {
 const updateBloodStock = (data,header) => {
   return fetch(
     "put",
-    `http://localhost:8080/api/admin/bloodinventory/addblood`,
+    `http://localhost:7070/api/admin/bloodinventory/addblood`,
     data,
     header,
     {}
@@ -68,7 +68,7 @@ const updateBloodStock = (data,header) => {
 const addUserByAdmin = (data,header) => {
   return fetch(
     "post",
-    `http://localhost:8080/api/admin/user/add_donor_user`,
+    `http://localhost:7070/api/admin/user/add_donor_user`,
     data,
     header,
     {}
@@ -79,7 +79,7 @@ const addUserByAdmin = (data,header) => {
 const createACamp = (data,header) => {
   return fetch(
     "post",
-    `http://localhost:8080/api/admin/event/createEvent`,
+    `http://localhost:7070/api/admin/event/createEvent`,
     data,
     header,
     {}
@@ -90,7 +90,7 @@ const createACamp = (data,header) => {
 const updateACamp = (data,header) => {
   return fetch(
     "put",
-    `http://localhost:8080/api/admin/event/createEvent`,
+    `http://localhost:7070/api/admin/event/createEvent`,
     data,
     header,
     {}
@@ -101,7 +101,7 @@ const updateACamp = (data,header) => {
 const deleteACamp = (id,header) => {
   return fetch(
     "delete",
-    `http://localhost:8080/api/admin/event/delete/${id}`,
+    `http://localhost:7070/api/admin/event/delete/${id}`,
     {},
     header,
     {}
@@ -112,7 +112,7 @@ const deleteACamp = (id,header) => {
 const getPendingIdproof = (header) => {
   return fetch(
     "get",
-    `http://localhost:8080/api/admin/identityproof/pendingIdStatus`,
+    `http://localhost:7070/api/admin/identityproof/pendingIdStatus`,
     {},
     header,
     {}
@@ -124,7 +124,7 @@ const getPendingIdproof = (header) => {
 const createBloodDonate = (id,data,header) => {
   return fetch(
     "post",
-    `http://localhost:8080/api/admin/blooddonation/createBloodDonation/${id}`,
+    `http://localhost:7070/api/admin/blooddonation/createBloodDonation/${id}`,
     data,
     header,
     {}
@@ -135,7 +135,7 @@ const createBloodDonate = (id,data,header) => {
 const ApproveRejectIdproof = (param, id, header) => {
   return fetch(
     "put",
-    `http://localhost:8080/api/admin/identityproof/updateIdVerification/${id}`,
+    `http://localhost:7070/api/admin/identityproof/updateIdVerification/${id}`,
     {},
     header,
     param
@@ -145,7 +145,7 @@ const ApproveRejectIdproof = (param, id, header) => {
 const getAllDonationHistory = (header) => {
   return fetch(
     "get",
-    `http://localhost:8080/api/admin/blooddonation/getAllDonation`,
+    `http://localhost:7070/api/admin/blooddonation/getAllDonation`,
     {},
     header,
     {}
@@ -156,7 +156,7 @@ const getAllDonationHistory = (header) => {
 const getAllAppointmentHistory = (header) => {
   return fetch(
     "get",
-    `http://localhost:8080/api/admin/appointment/list_all_appointment`,
+    `http://localhost:7070/api/admin/appointment/list_all_appointment`,
     {},
     header,
     {}

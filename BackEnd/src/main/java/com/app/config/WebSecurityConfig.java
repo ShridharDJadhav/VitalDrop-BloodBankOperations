@@ -1,5 +1,7 @@
 package com.app.config;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.app.filters.JWTRequestFilter;
 
@@ -67,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .authorizeRequests()
 	        .antMatchers("/api/admin/**").hasRole("ADMIN") 
 	        .antMatchers("/api/appointment/**", "/address/**", "/users/**").hasRole("USER")            
-	        .antMatchers("/api/bloodbank/**", "/api/auth/**").permitAll() 
+	        .antMatchers("/api/bloodbank/**", "/api/auth/**", "/users/**").permitAll() 
 	        .antMatchers("/api/events/**").hasAnyRole("USER", "ADMIN") // Allow only authenticated users
 	        .antMatchers(HttpMethod.OPTIONS).permitAll()
 	        .and()
@@ -75,6 +80,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        .and()
 	        .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 	}
+	
+	 @Bean
+	    public CorsConfigurationSource corsConfigurationSource() {
+	        CorsConfiguration configuration = new CorsConfiguration();
+	        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // Replace with your frontend URL
+	        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+	        configuration.setAllowedHeaders(Arrays.asList("*"));
+	        configuration.setAllowCredentials(true);
+	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	        source.registerCorsConfiguration("/**", configuration);
+	        return source;
+	    }
 
 	
 	//configure auth mgr bean : to be used in Auth REST controller

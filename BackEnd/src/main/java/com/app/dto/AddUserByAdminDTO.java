@@ -54,6 +54,6 @@ public class AddUserByAdminDTO {
 	@JsonProperty(access = Access.READ_ONLY)
 	Status status ;
 	
-	@JsonProperty(access = Access.READ_ONLY)
+	//@JsonProperty(access = Access.READ_ONLY)
 	private Role role;
 }

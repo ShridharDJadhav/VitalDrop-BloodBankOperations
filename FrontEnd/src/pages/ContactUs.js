@@ -22,18 +22,18 @@ const ContactUs = () => {
       email: "shridhardjadhav99@gmail.com",
       address: "PUNE",
     },
-    {
-      name: "Sagar Sahane",
-      phone: "+91 98226 06260",
-      email: "sagarsahane7632@gmail.com",
-      address: "PUNE",
-    },
-    {
-      name: "Rahul Patil",
-      phone: "+91 98345 29589",
-      email: "rahuljeevanpatil@gmail.com",
-      address: "PUNE",
-    },
+    // {
+    //   name: "Sagar Sahane",
+    //   phone: "+91 98226 06260",
+    //   email: "sagarsahane7632@gmail.com",
+    //   address: "PUNE",
+    // },
+    // {
+    //   name: "Rahul Patil",
+    //   phone: "+91 98345 29589",
+    //   email: "rahuljeevanpatil@gmail.com",
+    //   address: "PUNE",
+    // },
   ];
 
   const styles = {

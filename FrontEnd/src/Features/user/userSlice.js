@@ -39,6 +39,7 @@ export const login = (data) => {
   };
 };
 
+
 export const addAddresshandler = (id, data) => {
   return async (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
@@ -133,6 +134,8 @@ export const getDonationHistoryHandler = (id) => {
     });
   };
 };
+
+
 
 // to list all upcoming events
 export const getAllUpcomingEventsHandler = () => {
