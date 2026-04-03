@@ -24,7 +24,7 @@ import com.app.service.AppointmentService.IAppointmentService;
 
 @RestController
 @RequestMapping("/api/appointment")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://vitaldrop-90yy.onrender.com")
 public class AppointmentController {
 
 	@Autowired

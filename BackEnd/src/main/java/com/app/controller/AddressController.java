@@ -20,7 +20,7 @@ import com.app.service.AddressService.IAddressService;
 
 @RestController
 @RequestMapping("/address")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://vitaldrop-90yy.onrender.com")
 public class AddressController {
 
 	@Autowired

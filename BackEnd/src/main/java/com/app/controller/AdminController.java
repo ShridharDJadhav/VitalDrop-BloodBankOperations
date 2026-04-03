@@ -43,7 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://vitaldrop-90yy.onrender.com")
 @Slf4j
 public class AdminController {
 // dep:  for  user service i/f

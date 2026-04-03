@@ -20,7 +20,7 @@ import com.app.service.EventService.IEventService;
 
 @RestController
 @RequestMapping("/api/events")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://vitaldrop-90yy.onrender.com")
 public class EventController {
 
 	@Autowired
