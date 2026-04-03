@@ -103,12 +103,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return authenticationManagerBean();
 	}
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(encoder);
-
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService)
+//                .passwordEncoder(encoder);
+//
+//    }
 
     @Bean
     public PasswordEncoder encoder() {
